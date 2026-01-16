@@ -120,7 +120,9 @@ def summary(url: str):
             detail=str(ve)
         )
     except RuntimeError as re:
+        print(re)
         raise HTTPException(
+           
             status_code=status.HTTP_502_BAD_GATEWAY,
             detail=str(re)
         )
