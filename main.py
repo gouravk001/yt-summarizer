@@ -83,6 +83,8 @@ def getSummary(url):
         top_p=1.0
     )
 
+    print(response)
+    
     summary_text = response.output_text
 
     collection.insert_one({
