@@ -125,14 +125,13 @@ def fetch_script(video_id: str) -> str:
     payload = {"ids": [video_id]}
 
     try:
-        resp = requests.post(TRANSCRIPT_API_URL, headers=headers, json=payload, timeout=90)
+        resp = requests.post(TRANSCRIPT_API_URL, headers=headers, json=payload, timeout=200)
     except requests.exceptions.Timeout:
         raise RuntimeError("Transcript API request timed out")
     except requests.exceptions.RequestException as e:
         raise RuntimeError(f"Transcript API request failed: {str(e)}")
 
     if resp.status_code != 200:
-        # include response body for debugging (beware of leaking secrets in logs)
         raise RuntimeError(f"Transcript API error {resp.status_code}: {resp.text}")
 
     try:
